@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>積木勇者：德語寶石迷宮 Blockly Deutsch-RPG</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧙‍♂️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/blockly@10.4.3/blockly_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@10.4.3/blocks_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@10.4.3/javascript_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@10.4.3/msg/de.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🧙‍♂️ 積木勇者 Deutsch</h1>
+    <p class="subtitle" id="subtitle">第 1 關</p>
+    <nav id="level-nav">
+      <button class="level-btn active" data-level="0">第 1 關　迷宮</button>
+      <button class="level-btn" data-level="1">第 2 關　一天的計畫</button>
+      <button class="level-btn" data-level="2">第 3 關　搭公車進城</button>
+      <button class="level-btn" data-level="3">第 4 關　與 Anna 有約</button>
+      <button class="level-btn" data-level="4">第 5 關　趕上火車</button>
+      <button class="level-btn" data-level="5">第 6 關　雨中出門</button>
+      <button class="level-btn" data-level="6">第 7 關　修車上學去</button>
+      <button class="level-btn" data-level="7">第 8 關　白日夢散步</button>
+      <button class="level-btn" data-level="8">🌍 開放世界　Deutschstadt</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="blockly-panel">
+      <div id="blockly-div"></div>
+    </section>
+
+    <aside id="game-panel">
+      <div class="toolbar">
+        <button id="btn-run" class="btn primary">▶ 執行</button>
+        <button id="btn-reset" class="btn">⟲ 重置</button>
+        <button id="btn-hint" class="btn" title="依勇者目前的狀態提示下一句">💡 提示</button>
+        <button id="btn-solution" class="btn" title="把完整解答放進工作區">📖 解答</button>
+        <button id="btn-tts" class="btn tts on" title="德語發音開／關">🔊</button>
+        <label class="speed-control">
+          速度
+          <input type="range" id="speed" min="0.5" max="3" step="0.5" value="1">
+          <span id="speed-label">×1</span>
+        </label>
+      </div>
+
+      <div id="sentence-bar" class="card">
+        💬 <span id="sentence-de">Bereit?</span>
+        <span id="sentence-zh">（組好句子按「▶ 執行」）</span>
+      </div>
+
+      <canvas id="game-canvas"></canvas>
+
+      <div class="card" id="status-bar">
+        <span>🪙 金幣：<b id="hud-coins">0</b></span>
+        <span>🗝️ 鑰匙：<b id="hud-key">無</b></span>
+        <span>👣 動作：<b id="hud-steps">0</b></span>
+      </div>
+
+      <div id="message" class="message info">用左邊的德文積木組成句子，命令勇者行動！</div>
+
+      <div class="card" id="mission-card">
+        <h2>📜 任務目標</h2>
+        <ul id="mission-list"></ul>
+        <p class="mission-hint" id="mission-hint">提示：要站在金幣上才能撿、面對販賣機才能買、面對門才能開。</p>
+      </div>
+
+      <div class="card" id="vocab-card">
+        <h2>📖 單字表 Wörter</h2>
+        <ul id="vocab-list"></ul>
+        <p class="mission-hint">點單字可以聽發音 🔊　冠詞顏色：<b class="genus-m">der 陽性</b>・<b class="genus-f">die 陰性</b>・<b class="genus-n">das 中性</b></p>
+        <p class="mission-hint" id="vocab-note">📐 小文法：動詞的受詞要用受格（Akkusativ）——陽性 der 會變成 den，其他不變！</p>
+      </div>
+    </aside>
+  </main>
+
+  <div id="win-overlay" hidden>
+    <div class="win-card">
+      <div class="win-emoji">🎉 💎 🎉</div>
+      <h2>Geschafft! 過關！</h2>
+      <p id="win-stats"></p>
+      <button id="btn-again" class="btn primary">Nochmal! 再玩一次</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script src="commands.js"></script>
+  <script src="blocks.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
